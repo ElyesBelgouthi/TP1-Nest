@@ -1,6 +1,14 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Cv } from 'src/cv/entities/cv.entity';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
-export class User {
+@Entity()
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -12,4 +20,7 @@ export class User {
 
   @Column()
   password: string;
+
+  @OneToMany(() => Cv, (cv) => cv.user)
+  cvs: Cv[];
 }

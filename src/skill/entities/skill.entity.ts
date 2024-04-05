@@ -1,4 +1,11 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Cv } from 'src/cv/entities/cv.entity';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Skill extends BaseEntity {
@@ -7,4 +14,7 @@ export class Skill extends BaseEntity {
 
   @Column()
   designation: string;
+
+  @ManyToMany(() => Cv, (cv) => cv.skills)
+  cvs: Cv[];
 }

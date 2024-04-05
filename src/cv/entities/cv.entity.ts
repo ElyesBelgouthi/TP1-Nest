@@ -1,4 +1,14 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Skill } from 'src/skill/entities/skill.entity';
+import { User } from 'src/user/entities/user.entity';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Cv extends BaseEntity {
@@ -22,4 +32,11 @@ export class Cv extends BaseEntity {
 
   @Column()
   path: string;
+
+  @ManyToOne(() => User, (user) => user.cvs)
+  user: User;
+
+  @ManyToMany(() => Skill, (skill) => skill.cvs)
+  @JoinTable()
+  skills: Skill[];
 }
